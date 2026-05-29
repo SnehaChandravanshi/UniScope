@@ -277,14 +277,14 @@ You can also type **"help"** for examples!`;
 
       if (isBullet) {
         return (
-          <li key={idx} className="ml-[32px] list-disc pl-[4px] text-[24px] leading-[1.5] mb-[8px]">
+          <li key={idx} className="ml-[20px] sm:ml-[24px] list-disc pl-[4px] text-[14px] sm:text-[16px] leading-[1.5] mb-[4px] sm:mb-[6px]">
             {content}
           </li>
         );
       }
 
       return (
-        <p key={idx} className="text-[24px] leading-[1.5] mb-[12px] min-h-[14px]">
+        <p key={idx} className="text-[14px] sm:text-[16px] leading-[1.5] mb-[8px] sm:mb-[10px] min-h-[14px]">
           {content}
         </p>
       );
@@ -300,16 +300,16 @@ You can also type **"help"** for examples!`;
   ];
 
   return (
-    <div className="fixed bottom-[30px] right-[30px] z-[50] flex flex-col items-end">
+    <div className="fixed bottom-[24px] right-[24px] z-[50] flex flex-col items-end">
       {/* Floating Toggle Button */}
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="h-[110px] w-[110px] rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-white/10"
+        className="h-[60px] w-[60px] sm:h-[68px] sm:w-[68px] rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-white/10"
         aria-label="Toggle chat widget"
       >
-        {isOpen ? <X className="h-[52px] w-[52px]" /> : <MessageSquare className="h-[52px] w-[52px]" />}
+        {isOpen ? <X className="h-[26px] w-[26px] sm:h-[30px] sm:w-[30px]" /> : <MessageSquare className="h-[26px] w-[26px] sm:h-[30px] sm:w-[30px]" />}
       </motion.button>
 
       {/* Chat Window Panel */}
@@ -320,56 +320,56 @@ You can also type **"help"** for examples!`;
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className={`absolute bottom-[130px] right-0 w-[780px] sm:w-[840px] h-[950px] max-h-[85vh] flex flex-col rounded-[40px] border shadow-2xl overflow-hidden ${
+            className={`absolute bottom-[76px] sm:bottom-[84px] right-0 w-[calc(100vw-48px)] sm:w-[460px] h-[580px] sm:h-[660px] max-h-[80vh] flex flex-col rounded-[24px] sm:rounded-[28px] border shadow-2xl overflow-hidden ${
               isAuroraMode 
                 ? 'bg-slate-950/85 border-white/10 text-white backdrop-blur-xl shadow-black/60' 
                 : 'bg-card border-border/80 text-foreground shadow-black/15'
             }`}
           >
             {/* Header */}
-            <div className={`p-[32px] flex items-center justify-between border-b shrink-0 ${
+            <div className={`p-[18px] sm:p-[22px] flex items-center justify-between border-b shrink-0 ${
               isAuroraMode ? 'border-white/5 bg-white/5' : 'border-border/60 bg-muted/30'
             }`}>
-              <div className="flex items-center gap-[16px]">
-                <div className="h-[72px] w-[72px] rounded-[18px] bg-primary/20 text-primary flex items-center justify-center font-bold shrink-0">
-                  <Bot className="h-[42px] w-[42px]" />
+              <div className="flex items-center gap-[12px] sm:gap-[16px]">
+                <div className="h-[44px] w-[44px] sm:h-[50px] sm:w-[50px] rounded-[10px] sm:rounded-[12px] bg-primary/20 text-primary flex items-center justify-center font-bold shrink-0">
+                  <Bot className="h-[26px] w-[26px] sm:h-[30px] sm:w-[30px]" />
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-[30px] flex items-center gap-[10px] leading-none text-foreground">
+                  <h3 className="font-extrabold text-[16px] sm:text-[18px] flex items-center gap-[6px] sm:gap-[8px] leading-none text-foreground">
                     <span>UniBot Assistant</span>
-                    <span className="flex h-[12px] w-[12px] rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="flex h-[8px] w-[8px] sm:h-[10px] sm:w-[10px] rounded-full bg-emerald-500 animate-pulse" />
                   </h3>
-                  <span className="text-[20px] text-muted-foreground font-semibold">Admissions & Campus Queries</span>
+                  <span className="text-[12px] sm:text-[13px] text-muted-foreground font-semibold">Admissions & Campus Queries</span>
                 </div>
               </div>
-              <div className="flex items-center gap-[14px]">
+              <div className="flex items-center gap-[8px] sm:gap-[10px]">
                 <button
                   onClick={handleClearChat}
                   title="Clear chat history"
-                  className="flex items-center gap-[8px] text-muted-foreground hover:text-destructive hover:bg-destructive/10 px-[18px] py-[12px] rounded-[16px] border border-border/60 hover:border-destructive/20 cursor-pointer shrink-0 transition-all text-[20px] font-extrabold"
+                  className="flex items-center gap-[4px] text-muted-foreground hover:text-destructive hover:bg-destructive/10 px-[10px] py-[6px] rounded-[10px] border border-border/60 hover:border-destructive/20 cursor-pointer shrink-0 transition-all text-[12px] sm:text-[13px] font-extrabold"
                 >
-                  <Trash2 className="h-[24px] w-[24px]" />
+                  <Trash2 className="h-[15px] w-[15px] sm:h-[16px] sm:w-[16px]" />
                   <span>Delete Chats</span>
                 </button>
                 <button 
                   onClick={() => setIsOpen(false)}
-                  className="text-muted-foreground hover:text-foreground p-[12px] rounded-[16px] border border-transparent hover:bg-muted cursor-pointer shrink-0"
+                  className="text-muted-foreground hover:text-foreground p-[6px] sm:p-[8px] rounded-[10px] border border-transparent hover:bg-muted cursor-pointer shrink-0"
                 >
-                  <X className="h-[30px] w-[30px]" />
+                  <X className="h-[18px] w-[18px] sm:h-[20px] sm:w-[20px]" />
                 </button>
               </div>
             </div>
 
             {/* Messages Body */}
-            <div className="flex-grow overflow-y-auto p-[32px] flex flex-col gap-[32px]">
+            <div className="flex-grow overflow-y-auto p-[18px] sm:p-[22px] flex flex-col gap-[18px] sm:gap-[22px]">
               {messages.map((msg) => (
                 <div 
                   key={msg.id} 
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`flex items-start max-w-[85%] gap-[16px] ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}>
+                  <div className={`flex items-start max-w-[85%] gap-[12px] sm:gap-[16px] ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}>
                     {/* Avatar Icon */}
-                    <div className={`h-[56px] w-[56px] rounded-[16px] shrink-0 flex items-center justify-center border ${
+                    <div className={`h-[36px] w-[36px] sm:h-[40px] sm:w-[40px] rounded-[10px] sm:rounded-[12px] shrink-0 flex items-center justify-center border ${
                       msg.sender === 'bot'
                         ? isAuroraMode 
                           ? 'bg-white/5 border-white/5 text-indigo-300' 
@@ -378,11 +378,11 @@ You can also type **"help"** for examples!`;
                           ? 'bg-primary/20 border-white/5 text-white' 
                           : 'bg-primary border-primary text-white'
                     }`}>
-                      {msg.sender === 'bot' ? <Bot className="h-[30px] w-[30px]" /> : <UserIcon className="h-[30px] w-[30px]" />}
+                      {msg.sender === 'bot' ? <Bot className="h-[18px] w-[18px] sm:h-[20px] sm:w-[20px]" /> : <UserIcon className="h-[18px] w-[18px] sm:h-[20px] sm:w-[20px]" />}
                     </div>
 
                     {/* Bubble Content */}
-                    <div className={`rounded-[28px] px-[26px] py-[18px] text-[24px] ${
+                    <div className={`rounded-[18px] px-[14px] py-[10px] sm:px-[18px] sm:py-[12px] text-[14px] sm:text-[16px] ${
                       msg.sender === 'user'
                         ? 'bg-primary text-primary-foreground font-semibold rounded-tr-none'
                         : isAuroraMode
@@ -397,16 +397,16 @@ You can also type **"help"** for examples!`;
 
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="flex items-center gap-[16px]">
-                    <div className={`h-[56px] w-[56px] rounded-[16px] shrink-0 flex items-center justify-center border ${
+                  <div className="flex items-center gap-[12px] sm:gap-[16px]">
+                    <div className={`h-[36px] w-[36px] sm:h-[40px] sm:w-[40px] rounded-[10px] sm:rounded-[12px] shrink-0 flex items-center justify-center border ${
                       isAuroraMode ? 'bg-white/5 border-white/5 text-indigo-300' : 'bg-primary/10 border-primary/10 text-primary'
                     }`}>
-                      <Bot className="h-[30px] w-[30px]" />
+                      <Bot className="h-[18px] w-[18px] sm:h-[20px] sm:w-[20px]" />
                     </div>
-                    <div className={`rounded-[28px] px-[28px] py-[22px] bg-muted border border-border/40 rounded-tl-none flex gap-[10px] items-center`}>
-                      <span className="h-[14px] w-[14px] rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <span className="h-[14px] w-[14px] rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <span className="h-[14px] w-[14px] rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className={`rounded-[18px] px-[18px] py-[12px] bg-muted border border-border/40 rounded-tl-none flex gap-[6px] items-center`}>
+                      <span className="h-[8px] w-[8px] rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="h-[8px] w-[8px] rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="h-[8px] w-[8px] rounded-full bg-muted-foreground/60 animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
                 </div>
@@ -415,18 +415,18 @@ You can also type **"help"** for examples!`;
             </div>
 
             {/* Suggestions */}
-            <div className={`p-[26px] shrink-0 flex flex-wrap gap-[14px] border-t ${isAuroraMode ? 'border-white/5 bg-slate-950/20' : 'border-border/40 bg-muted/10'}`}>
+            <div className={`p-[14px] sm:p-[18px] shrink-0 flex flex-wrap gap-[8px] sm:gap-[10px] border-t ${isAuroraMode ? 'border-white/5 bg-slate-950/20' : 'border-border/40 bg-muted/10'}`}>
               {suggestions.map((s) => (
                 <button
                   key={s}
                   onClick={() => handleSend(s)}
-                  className={`text-[20px] font-bold px-[20px] py-[14px] rounded-[16px] border transition-all cursor-pointer flex items-center gap-[8px] ${
+                  className={`text-[12px] sm:text-[13px] font-bold px-[12px] py-[8px] rounded-[10px] border transition-all cursor-pointer flex items-center gap-[4px] ${
                     isAuroraMode
                       ? 'border-white/5 hover:border-primary/50 bg-white/5 text-slate-300 hover:text-white'
                       : 'border-border/60 hover:border-primary/60 bg-card hover:bg-muted text-muted-foreground hover:text-foreground'
                   }`}
                 >
-                  <Sparkles className="h-[22px] w-[22px] text-primary shrink-0 animate-pulse" />
+                  <Sparkles className="h-[14px] w-[14px] sm:h-[16px] sm:w-[16px] text-primary shrink-0 animate-pulse" />
                   <span>{s}</span>
                 </button>
               ))}
@@ -438,7 +438,7 @@ You can also type **"help"** for examples!`;
                 e.preventDefault();
                 handleSend(input);
               }}
-              className={`p-[26px] border-t shrink-0 flex gap-[16px] items-center ${
+              className={`p-[14px] sm:p-[18px] border-t shrink-0 flex gap-[10px] items-center ${
                 isAuroraMode ? 'border-white/5 bg-white/5' : 'border-border/60 bg-card'
               }`}
             >
@@ -447,7 +447,7 @@ You can also type **"help"** for examples!`;
                 placeholder="Ask about placements, fees, courses..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className={`flex-grow px-[26px] py-[20px] border rounded-[28px] text-[22px] focus:outline-none focus:ring-1 focus:ring-primary/20 ${
+                className={`flex-grow px-[16px] py-[10px] sm:px-[18px] sm:py-[12px] border rounded-[18px] text-[14px] sm:text-[15px] focus:outline-none focus:ring-1 focus:ring-primary/20 ${
                   isAuroraMode 
                     ? 'border-white/10 bg-slate-950/40 text-white focus:border-primary/50' 
                     : 'border-border bg-background focus:border-primary/50'
@@ -455,9 +455,9 @@ You can also type **"help"** for examples!`;
               />
               <button 
                 type="submit"
-                className="h-[64px] w-[64px] bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center rounded-[20px] transition-all cursor-pointer border border-white/10 shrink-0"
+                className="h-[42px] w-[42px] sm:h-[48px] sm:w-[48px] bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center rounded-[12px] transition-all cursor-pointer border border-white/10 shrink-0"
               >
-                <Send className="h-[30px] w-[30px]" />
+                <Send className="h-[18px] w-[18px] sm:h-[20px] sm:w-[20px]" />
               </button>
             </form>
           </motion.div>

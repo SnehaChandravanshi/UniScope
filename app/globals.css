@@ -126,12 +126,6 @@
   }
   html {
     @apply font-sans;
-    font-size: 28px;
-  }
-  @media (min-width: 1024px) {
-    html {
-      font-size: 32px;
-    }
   }
 }
 
