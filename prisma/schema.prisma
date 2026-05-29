@@ -1,0 +1,129 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               String            @id @default(uuid())
+  name             String?
+  email            String            @unique
+  password         String
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  reviews          Review[]
+  savedColleges    SavedCollege[]
+  savedComparisons SavedComparison[]
+  questions        Question[]
+  answers          Answer[]
+}
+
+model College {
+  id             String         @id @default(uuid())
+  slug           String         @unique
+  name           String
+  description    String
+  location       String
+  fees           Float          // Average annual fees in INR
+  rating         Float          // Out of 5.0
+  placementStats Json           // JSON structure: { averagePackage: number, highestPackage: number, placementPercentage: number, recruiters: string[] }
+  ownershipType  String         // e.g. "Public", "Private"
+  image          String         // URL or path to image
+  highlights     String[]       // Highlight points
+  ranking        String?        // e.g., "NIRF Rank 1"
+  accreditation  String?        // e.g., "NAAC A++"
+  gallery        String[]       // Campus images URLs
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  courses        Course[]
+  reviews        Review[]
+  savedByUsers   SavedCollege[]
+  questions      Question[]
+
+  @@index([slug])
+  @@index([fees])
+  @@index([rating])
+}
+
+model Course {
+  id          String   @id @default(uuid())
+  collegeId   String
+  college     College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  name        String   // e.g. "B.Tech Computer Science"
+  duration    String   // e.g. "4 Years"
+  fees        Float    // Annual fees for this course
+  eligibility String   // e.g. "Class 12 with 60% + JEE Main"
+  createdAt   DateTime @default(now())
+
+  @@index([collegeId])
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  collegeId String
+  college   College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  rating    Float    // Rating given in the review
+  comment   String   // Review content
+  pros      String?  // Pros separated by comma or newlines
+  cons      String?  // Cons separated by comma or newlines
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([collegeId])
+}
+
+model SavedCollege {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  collegeId String
+  college   College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, collegeId])
+}
+
+model SavedComparison {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  collegeIds String[] // Array of college IDs compared
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Question {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  collegeId String?
+  college   College? @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  answers   Answer[]
+
+  @@index([userId])
+  @@index([collegeId])
+}
+
+model Answer {
+  id         String   @id @default(uuid())
+  content    String
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId])
+  @@index([questionId])
+}
